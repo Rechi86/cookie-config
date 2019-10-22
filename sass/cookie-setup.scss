@@ -1,0 +1,69 @@
+/*
+    Created on : 16.10.2019, 14:17:22
+    Author     : Rechi
+*/
+
+
+/* Main Container */
+
+#cookie-setup {
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    background-color:#eee;
+    padding:1rem;
+    display:none;
+    opacity:0;
+    transition: opacity 10s;
+}
+
+#cookie-setup.show {
+    display:block;
+    animation: fadeInFromNone 0.5s ease-out forwards;
+}
+
+@keyframes fadeInFromNone {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* Text */
+#cookie-setup-container {
+    h3 {
+        font-size:1.2rem;
+        margin:0;
+    }
+    
+    p {
+        margin-top:.25rem;
+    }
+    
+}
+
+/* Buttons */
+#cookie-setup-allow-all, #cookie-setup-save {
+    border-radius:.5rem;
+    padding:.5rem .8rem;
+    background-color:#aaa;
+    color:black;
+    border:none;
+    margin-top:1rem;
+    margin-right:1rem;
+}
+
+#cookie-setup-allow-all {
+    background-color:#a3d892;
+}
