@@ -33,8 +33,8 @@ function checkCookies(){
 
 function initCookies(){
     // asign button listeners
-    document.getElementById("cookie-setup-allow-all").onclick =allowAllCookies;
-    document.getElementById("cookie-setup-save").onclick =setCookieConfig;
+    document.getElementById("cookie-setup-allow-all").onclick =function(){setCookieConfig(true)};
+    document.getElementById("cookie-setup-save").onclick =function(){setCookieConfig(false)};
     
     let cookieState = Cookies.get("cookie-setup");
     
@@ -53,6 +53,7 @@ function initCookies(){
        allowedCategeories = allowedCategories.concat(activeCategories.split(',')); 
        console.log(allowedCookies);
        addAllowedScripts();
+       addAllowedIframes();
        cookieInterval= window.setInterval(checkCookies,3000);
     }
 
@@ -62,25 +63,28 @@ function initCookies(){
     }
 }
 
-// callback for allowing all cookies
-function allowAllCookies(){
-    Cookies.set('cookie-setup','all',{path:''});
-    location.reload();
-}
 
 // callback for setting a custom cookie selection
-function setCookieConfig(){
+function setCookieConfig(all){
     let activeCookies = "";
     let activeCategories ="";
     let activePaths ="";
+    let activeIframes ="";
     
     let categoryContainer = document.getElementById("cookie-category-container");
     let children = categoryContainer.children;
     for (let i = 0; i < children.length; i++) {
-        if(children[i].checked===true && children[i].value){
+        if((children[i].checked===true || all) && children[i].value){
             activeCookies +=children[i].value+",";
             activeCategories +=children[i].dataset.category+",";
-            activePaths += children[i].dataset.url+",";
+            
+            if(children[i].dataset.url){
+                activePaths += children[i].dataset.url+",";
+            }
+            
+            if(children[i].dataset.iframeclass){
+                activeIframes += children[i].dataset.iframeclass+",";
+            }
         }
     }       
     
@@ -88,7 +92,8 @@ function setCookieConfig(){
     if(activeCookies!=""){
         Cookies.set('cookie-setup-cookies',activeCookies);
         Cookies.set('cookie-setup-categories',activeCategories);
-        Cookies.set('cookie-setup-paths',activePaths);
+        Cookies.set('cookie-setup-paths',activePaths)
+        Cookies.set('cookie-setup-iframes',activeIframes);
     }
     location.reload();
 }
@@ -122,6 +127,29 @@ function addAllowedScripts(){
     }
 
 }
+
+function addAllowedIframes(){
+    let allowedIframes = Cookies.get("cookie-setup-iframes");
+    allowedIframes = allowedIframes.split(',');
+    
+    var i, frames;
+    frames = document.getElementsByTagName("iframe");
+    for (i = 0; i < frames.length; ++i)
+    {
+        let hit = false;
+        for (j = 0; j <allowedIframes.length;j++){
+            if(frames[i].classList.contains(allowedIframes[j])){
+                hit=true;
+            }
+        }
+        // The iFrame
+        if(hit){
+            frames[i].setAttribute("sandbox", "allow-same-origin allow-scripts");
+            frames[i].src = frames[i].src;
+        }
+    }
+};
+
 
 document.addEventListener('DOMContentLoaded', function(){
     setupTestCookies();
