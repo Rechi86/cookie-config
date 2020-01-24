@@ -31,11 +31,11 @@ Sie können Ihre Einstellungen jederzeit auf der Impressumsseite zurücksetzen. 
                        value="tracking1,tracking2">
                 <label for="cookie-category-default">Google Analytics</label><br>
                 <input type="checkbox" name="cookie-categories" id="cookie-category-soundcloud" 
-                       data-category="soundcloud" data-iframeclass="soundcloud"
+                       data-category="soundcloud" data-iframe="soundcloud"
                        value="iframe-soundclound">
                 <label for="cookie-category-default">Soundcloud</label><br>
                 <input type="checkbox" name="cookie-categories" id="cookie-category-youtube" 
-                       data-category="youtube" data-iframeclass="youtube"
+                       data-category="youtube" data-iframe="youtube"
                        value="iframe-youtube">
                 <label for="cookie-category-default">Youtube</label><br>
               </div>
@@ -79,9 +79,10 @@ Sie können Ihre Einstellungen jederzeit auf der Impressumsseite zurücksetzen. 
         </div>
         
         <div>
-            <iframe class="soundcloud" sandbox="allow-scripts"  width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe></div>
-            <iframe class="youtube" sandbox="allow-scripts" width="560" height="315" src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            
+            <iframe class="soundcloud cookie-setup-blocked" data-iframe="soundcloud" width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+        
+            <iframe class="youtube cookie-setup-blocked" data-iframe="youtube" width="560" height="315" data-src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>    
             
         <script src="./scripts/js.cookie.min.js"></script>
         <script src="./scripts/cookie-setup.js"></script>

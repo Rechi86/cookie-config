@@ -57,3 +57,14 @@
 #cookie-setup-allow-all {
   background-color: #a3d892;
 }
+
+/* Iframes */
+.cookie-setup-blocked {
+  border: 1px solid #eeeeee;
+  background-color: #eeeeee;
+  display: inline-block;
+}
+.cookie-setup-blocked .cookie-setup-blocked-info {
+  text-align: center;
+  background-color: rgba(230, 230, 230, 0.5);
+}
