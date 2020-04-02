@@ -2,154 +2,61 @@
  * Basic Cookie Setup & Destroy Functionality
  */
 
-var cookieScriptPaths;
-
-
-// setup some cookies for testing
-function setupTestCookies(){
-    document.cookie = "username=John Doe; path=/";
-    document.cookie = "tester=John Doe; path=/";
-    document.cookie = "system1=John Doe; path=/";
-    document.cookie = "system2=John Doe; path=/";
-    document.cookie = "tracking1=John Doe; path=/";
-    document.cookie = "tracking2=John Doe; path=/";
-}
-
-// intervall-function which removes cookies wich are not allowed
-function checkCookies(){
-    var activeCookies = Object.keys(Cookies.get());    
-    activeCookies.forEach (function(element) {
-        if(allowedCookies.indexOf(element)==-1){
-            Cookies.remove(element);
-        }
-    });   
-}
-
-function initCookies(){
+function initCookies(paths){
     // asign button listeners
     document.getElementById("cookie-setup-allow-all").onclick =function(){setCookieConfig(true)};
-    document.getElementById("cookie-setup-save").onclick =function(){setCookieConfig(false)};
+    document.getElementById("cookie-setup-allow-functional").onclick =function(){setCookieConfig(false)};
     
     let cookieState = Cookies.get("cookie-setup");
     
-    // no selection created -> show menu
+    // inital state -> show menu
     if(!cookieState){
-        document.getElementById("cookie-setup").classList.add('show');
-        cookieInterval =window.setInterval(checkCookies,3000);
-        //wrapAllIframes();
-        addAllowedIframes();
+        document.getElementById("cookie-setup-overlay").classList.add('show');
+        wrapAllIframes();
+    }
+
+    // only functional cookies -> show bocked iframe info
+    if(cookieState=="functional"){
+        wrapAllIframes();        
     }
     
-    // custom setup
-    if(cookieState=="custom"){
-       activeCookies = Cookies.get("cookie-setup-cookies");
-       activeCategories = Cookies.get("cookie-setup-categories");
-       
-       allowedCookies = allowedCookies.concat(activeCookies.split(','));
-       allowedCategeories = allowedCategories.concat(activeCategories.split(',')); 
-
-       addAllowedScripts();
-       addAllowedIframes();
-       
-        // Check & Delete Cookies per interval
-        cookieInterval= window.setInterval(checkCookies,3000);
-    }
-
-    // all cookies allowed
+    // all cookies allowed -> activate iframes, add additional scripts
     if(cookieState=="all"){
-        //window.console.log(cookieInterval);
+        activateIframes();
+        addScripts(paths);
     }
 }
 
 
-// callback for setting a custom cookie selection
+// callback for setting a cookie selection
 function setCookieConfig(all){
-    let activeCookies = "";
-    let activeCategories ="";
-    let activePaths ="";
-    let activeIframes ="";
     
-    let categoryContainer = document.getElementById("cookie-category-container");
-    let children = categoryContainer.children;
-    for (let i = 0; i < children.length; i++) {
-        if((children[i].checked===true || all) && children[i].value){
-            activeCookies +=children[i].value+",";
-            activeCategories +=children[i].dataset.category+",";
-            
-            if(children[i].dataset.url){
-                activePaths += children[i].dataset.url+",";
-            }
-            
-            if(children[i].dataset.iframe){
-                activeIframes += children[i].dataset.iframe+",";
-            }
-        }
-    }       
-
-    Cookies.set('cookie-setup','custom');
-    if(activeCookies!=""){
-        Cookies.set('cookie-setup-cookies',activeCookies);
-        Cookies.set('cookie-setup-categories',activeCategories);
-        Cookies.set('cookie-setup-paths',activePaths);
-        Cookies.set('cookie-setup-iframes',activeIframes);
-    }
+    if(all){
+        Cookies.set('cookie-setup','all');
+    } else {
+        Cookies.set('cookie-setup','functional');
+    }      
+  
     location.reload();
 }
 
-// helper-function for adding external scripts
-function addScript(url){
-    var script = document.createElement('script');
-    script.onload = function () {
-        //do stuff with the script
-    };
-    script.src = url;
+// Add additional scripts based on array of script-objects
+function addScripts(scripts){
+   for (var i = 0, len = scripts.length; i < len; i++) {
+    
+        var script = document.createElement('script');
 
-    document.head.appendChild(script);
-}
-
-function addAllowedScripts(){
-
-   let allowedPaths = Cookies.get("cookie-setup-paths");
-   allowedPaths = allowedPaths.split(',');
-
-   for (var i = 0, len = allowedPaths.length; i < len; i++) {
-        addScript(allowedPaths[i]);
-    }
-
-}
-
-function addAllowedIframes(){
-    let allowedIframes = Cookies.get("cookie-setup-iframes");
-    if(allowedIframes){
-        
-        allowedIframes = allowedIframes.split(',');
-
-        var i, frames;
-        frames = document.getElementsByTagName("iframe");
-        for (i = 0; i < frames.length; ++i)
-        {
-            let hit = false;
-            for (j = 0; j <allowedIframes.length;j++){
-                if(frames[i].dataset.iframe == allowedIframes[j]){
-                    hit=true;
-                }
-            }
-            // The iFrame
-            if(hit){
-                // Version using sandbox-Attribute
-                //frames[i].setAttribute("sandbox", "allow-same-origin allow-scripts");
-                
-                // Version using data-src 
-                frames[i].src = frames[i].dataset.src;
-            }
-            else {
-                wrapBlocked(frames[i]);
+        // map all script properies to the newly created element
+        for (var prop in scripts[i]) {
+            if (scripts[i].hasOwnProperty(prop)) {
+                console.log(scripts[i].prop);
+                script[prop] = scripts[i][prop];
             }
         }
-    } else {
-        wrapAllIframes();
+
+        document.head.appendChild(script);
     }
-};
+}
 
 // Wrapp all Iframes with Blocked Info
 function wrapAllIframes(){
@@ -160,41 +67,32 @@ function wrapAllIframes(){
 }
 
 // Activate Iframe e.g. with Element Button
-function activateIframeCategory(category){
-    activeCategories =Cookies.get('cookie-setup-iframes');
-    Cookies.set('cookie-setup-iframes',activeCategories+","+category);
+function activateIframes(){
     frames = document.getElementsByTagName("iframe");
-    for (i = 0; i < frames.length; ++i)
+    for (i = 0; i < frames.length; i++)
     {
-        if(frames[i].dataset.iframe == category){
-            
-            frames[i].src = frames[i].dataset.src;
-            
-            parentElement = frames[i].parentNode.parentNode;
-            blockedElement = frames[i].parentNode;
-            
-            parentElement.insertBefore(frames[i],frames[i].parentNode);
+        frames[i].src = frames[i].dataset.src;
+        blockedElement = frames[i].parentNode;
+
+        if(blockedElement.classList.contains("cookie-setup-blocked-info")){
             parentElement.removeChild(blockedElement);
         }
     }
 }
 
-
 // Helper Function for adding blocked Info
 function wrapBlocked(el) {
     var wrapper = document.createElement('div');
     
-    var iframeCategory = el.dataset.iframe;
-    var categoryReadable = iframeCategory[0].toUpperCase() + iframeCategory.slice(1);
     wrapper.classList.add("cookie-setup-blocked");
 
     el.parentNode.insertBefore(wrapper, el);
     wrapper.appendChild(el);
     wrapper.innerHTML += "<div class='cookie-setup-blocked-info'>"+
-            "<p>Inhalt von "+ categoryReadable + " blockiert</p>" +
-            "<button class='btn' >Cookies von "+ categoryReadable + " erlauben</button></div>";
+            "<p>Inhalt von von Drittanbieter blockiert</p>" +
+            "<button class='btn' >Alle Cookies erlauben</button></div>";
     button = wrapper.getElementsByTagName("button");
-    button[0].addEventListener("click",function(){activateIframeCategory(iframeCategory);});
+    button[0].addEventListener("click",function(){setCookieConfig(true);});
 }
 
 function removeAllCookies(){
@@ -202,16 +100,3 @@ function removeAllCookies(){
         Cookies.remove(cookieName);
     });
 }
-
-
-document.addEventListener('DOMContentLoaded', function(){
-    setupTestCookies();
-    allowedCookies =["cookie-setup", "cookie-setup-cookies","cookie-setup-categories","cookie-setup-paths", "cookie-setup-iframes"];
-    allowedCategories = ["system"];
-    initCookies();   
-}, false);
-
-
-
-
-

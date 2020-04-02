@@ -2,26 +2,48 @@
     Created on : 16.10.2019, 14:17:22
     Author     : Rechi
 */
-
-
 /* Main Container */
 
-#cookie-setup {
-    position:absolute;
-    left:0;
-    right:0;
-    top:0;
-    background-color:#eee;
-    padding:1rem;
+html,body {
+    width:100%;
+    height:100%;
+
+    margin:0;
+    padding:0;
+}
+
+#cookie-setup-overlay {
+    background-color:rgba(0,0,0,0.3);
+    width:100%;
+    height:100%;
     display:none;
     opacity:0;
     transition: opacity 10s;
+    position:fixed;
 }
 
-#cookie-setup.show {
+#cookie-setup-overlay.show {
     display:block;
     animation: fadeInFromNone 0.5s ease-out forwards;
 }
+
+
+#cookie-setup {
+    position:absolute;
+    left:50%;
+    width:300px;
+    top:30%;
+    background-color:#eee;
+    padding:1rem;
+    margin-left:-150px;
+    box-sizing:border-box;
+
+    @media screen and (min-width:768px) {
+        width:600px;
+        margin-left:-300px;
+    }
+}
+
 
 @keyframes fadeInFromNone {
     0% {
@@ -54,7 +76,7 @@
 }
 
 /* Buttons */
-#cookie-setup-allow-all, #cookie-setup-save {
+#cookie-setup-allow-all, #cookie-setup-allow-functional {
     border-radius:.5rem;
     padding:.5rem .8rem;
     background-color:#aaa;
@@ -62,6 +84,7 @@
     border:none;
     margin-top:1rem;
     margin-right:1rem;
+    cursor:pointer;
 }
 
 #cookie-setup-allow-all {
@@ -78,4 +101,14 @@
         text-align:center;
         background-color:rgba(230,230,230,.5);
     }
+}
+
+/* only Testcontent */
+#content {
+    overflow:auto;
+}
+
+#test-wrapper {
+    border:1px solid red;
+    padding:1rem;
 }

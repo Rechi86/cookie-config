@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>Cookie Setup Demo</title>
@@ -12,37 +7,18 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/cookie-setup.css">
     </head>
     <body>
-        <div id="cookie-setup">
-            <div id="cookie-setup-container">
-                <h3>Diese Seite verwendet Cookies </h3>
-                <p>Wir verwenden Cookies, um erweiterte Seitenfunktionen zu ermöglichen und die Zugriffe auf diese Website zu analysieren.<br>
-Sie können Ihre Einstellungen jederzeit auf der Impressumsseite zurücksetzen. Weitere Infos
-                </p>
-              
-              <div id="cookie-category-container">  
-                <input type="checkbox" name="cookie-categories" id="cookie-category-default" 
-                       data-category="system"
-                       data-url="./scripts/test/systemScript1.js,./scripts/test/systemScript2.js"
-                       value="system1,system2" checked="" disabled="">
-                <label for="cookie-category-default">Seitenfunktionalität</label><br>               
-                <input type="checkbox" name="cookie-categories" id="cookie-category-tracking" 
-                       data-category="tracking" 
-                       data-url="./scripts/test/trackingScript1.js,./scripts/test/trackingScript2.js"
-                       value="tracking1,tracking2">
-                <label for="cookie-category-default">Google Analytics</label><br>
-                <input type="checkbox" name="cookie-categories" id="cookie-category-soundcloud" 
-                       data-category="soundcloud" data-iframe="soundcloud"
-                       value="iframe-soundclound">
-                <label for="cookie-category-default">Soundcloud</label><br>
-                <input type="checkbox" name="cookie-categories" id="cookie-category-youtube" 
-                       data-category="youtube" data-iframe="youtube"
-                       value="iframe-youtube">
-                <label for="cookie-category-default">Youtube</label><br>
-              </div>
-              
-              <button id="cookie-setup-save">Voreinstellungen speichern</button>
-              <button id="cookie-setup-allow-all">Alle Cookies erlauben</button>
-              
+        <div id="cookie-setup-overlay">
+            <div id="cookie-setup">
+                <div id="cookie-setup-container">
+                    <h3>Diese Seite verwendet Cookies </h3>
+                    <p>Wir verwenden Cookies, um erweiterte Seitenfunktionen zu ermöglichen und die Zugriffe auf diese Website zu analysieren.<br>
+    Sie können Ihre Einstellungen jederzeit auf der Impressumsseite zurücksetzen. Weitere Infos
+                    </p>
+                
+                <button id="cookie-setup-allow-functional">Funktionscookies erlauben</button>
+                <button id="cookie-setup-allow-all">Alle Cookies erlauben</button>
+                
+                </div>
             </div>
         </div>
         
@@ -59,32 +35,37 @@ Sie können Ihre Einstellungen jederzeit auf der Impressumsseite zurücksetzen. 
                 Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam 
                 semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
             </p>
-            <h1>Testenhalt</h1>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis 
-                dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque 
-                eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, 
-                vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis 
-                eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. 
-                Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat 
-                a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. 
-                Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam 
-                semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-            </p>
-            <h1>Anleitung zum Einbau</h1>
-            <p>
-                Die Input-Elemente des Overlays enthalten als Value die jeweiligen Cookies mit Komma getrennt.<br>
-                Wird das Formular bestätigt, wird die Seite neu geladen.
-            </p>
         </div>
         
-        <div>
-            <iframe class="soundcloud cookie-setup-blocked" data-iframe="soundcloud" width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-        
-            <iframe class="youtube cookie-setup-blocked" data-iframe="youtube" width="560" height="315" data-src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id="test-wrapper">
+            <iframe class="cookie-setup-blocked"  width="560" height="315" data-src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe class="cookie-setup-blocked"  width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>    
         </div>    
             
         <script src="./scripts/js.cookie.min.js"></script>
         <script src="./scripts/cookie-setup.js"></script>
+
+        <script>
+
+            // set additional paths array of objects with needed properties
+            // Info:  Some html-properties need camelcase js-Properties, e.g. crossorign -> crossOrigin
+            let scripts = [
+                {
+                    "src":"./scripts/test/evilTrackingScript.js"
+                },
+                {
+                    "src":"https://code.jquery.com/jquery-3.4.1.min.js",
+                    "integrity":"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=",
+                    "crossOrigin":"anonymous"
+                }
+
+            ];
+
+            document.addEventListener('DOMContentLoaded', function(){
+                initCookies(scripts);   
+            }, false);
+            
+        </script>
+
     </body>
 </html>
