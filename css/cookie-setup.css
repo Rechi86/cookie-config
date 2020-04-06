@@ -3,7 +3,8 @@
     Author     : Rechi
 */
 /* Main Container */
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -16,15 +17,14 @@ html, body {
   height: 100%;
   display: none;
   opacity: 0;
-  -webkit-transition: opacity 10s;
   transition: opacity 10s;
   position: fixed;
+  z-index: 1000;
 }
 
 #cookie-setup-overlay.show {
   display: block;
-  -webkit-animation: fadeInFromNone 0.5s ease-out forwards;
-          animation: fadeInFromNone 0.5s ease-out forwards;
+  animation: fadeInFromNone 0.5s ease-out forwards;
 }
 
 #cookie-setup {
@@ -35,29 +35,15 @@ html, body {
   background-color: #eee;
   padding: 1rem;
   margin-left: -150px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
+  top:10%;
 }
 
 @media screen and (min-width: 768px) {
   #cookie-setup {
     width: 600px;
     margin-left: -300px;
-  }
-}
-
-@-webkit-keyframes fadeInFromNone {
-  0% {
-    display: none;
-    opacity: 0;
-  }
-  1% {
-    display: block;
-    opacity: 0;
-  }
-  100% {
-    display: block;
-    opacity: 1;
+    top:30%;
   }
 }
 
@@ -75,21 +61,20 @@ html, body {
     opacity: 1;
   }
 }
-
 /* Text */
 #cookie-setup-container h3 {
   font-size: 1.2rem;
   margin: 0;
 }
-
 #cookie-setup-container p {
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 
 /* Buttons */
-#cookie-setup-allow-all, #cookie-setup-allow-functional {
-  border-radius: .5rem;
-  padding: .5rem .8rem;
+#cookie-setup-allow-all,
+#cookie-setup-allow-functional {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.8rem;
   background-color: #aaa;
   color: black;
   border: none;
@@ -104,14 +89,21 @@ html, body {
 
 /* Iframes */
 .cookie-setup-blocked {
-  border: 1px solid #eeeeee;
-  background-color: #eeeeee;
-  display: inline-block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
-.cookie-setup-blocked .cookie-setup-blocked-info {
+/* Overlay with Button */
+.cookie-setup-blocked-info {
   text-align: center;
   background-color: rgba(230, 230, 230, 0.5);
+  width: 100%;
+  position: absolute;
+  padding-top: 30%;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
 }
 
 /* only Testcontent */
@@ -119,8 +111,28 @@ html, body {
   overflow: auto;
 }
 
-#test-wrapper {
+.test-wrapper::before {
+  padding-top: 50%;
+  display: block;
+  content: "";
+  position: relative;
+}
+
+.test-wrapper {
   border: 1px solid red;
   padding: 1rem;
+  width: 100%;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
 }
-/*# sourceMappingURL=cookie-setup.css.map */
+
+iframe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

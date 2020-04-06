@@ -5,6 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/cookie-setup.css">
+
+        <script src="./scripts/js.cookie.min.js"></script>
+        <script src="./scripts/cookie-setup.js"></script>
+
     </head>
     <body>
         <div id="cookie-setup-overlay">
@@ -15,8 +19,8 @@
     Sie können Ihre Einstellungen jederzeit auf der Impressumsseite zurücksetzen. Weitere Infos
                     </p>
                 
-                <button id="cookie-setup-allow-functional">Funktionscookies erlauben</button>
-                <button id="cookie-setup-allow-all">Alle Cookies erlauben</button>
+                <button id="cookie-setup-allow-functional" class="btn">Funktionscookies erlauben</button>
+                <button id="cookie-setup-allow-all" class="btn">Alle Cookies erlauben</button>
                 
                 </div>
             </div>
@@ -37,13 +41,17 @@
             </p>
         </div>
         
-        <div id="test-wrapper">
-            <iframe class="cookie-setup-blocked"  width="560" height="315" data-src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe class="cookie-setup-blocked"  width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>    
-        </div>    
+
+        
+        <div class="test-wrapper">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <div class="test-wrapper">
+            <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>    
+        </div>
             
-        <script src="./scripts/js.cookie.min.js"></script>
-        <script src="./scripts/cookie-setup.js"></script>
+
 
         <script>
 
