@@ -52,28 +52,29 @@
         </div>
             
 
+        <div class="test-wrapper">
+            <script>
 
-        <script>
+    //             set additional paths array of objects with needed properties
+    //             Info:  Some html-properties need camelcase js-Properties, e.g. crossorign -> crossOrigin
+                let scripts = [
+                    {
+                        "src":"./scripts/test/evilTrackingScript.js"
+                    },
+                    {
+                        "src":"https://code.jquery.com/jquery-3.4.1.min.js",
+                        "integrity":"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=",
+                        "crossOrigin":"anonymous"
+                    }
 
-            // set additional paths array of objects with needed properties
-            // Info:  Some html-properties need camelcase js-Properties, e.g. crossorign -> crossOrigin
-            let scripts = [
-                {
-                    "src":"./scripts/test/evilTrackingScript.js"
-                },
-                {
-                    "src":"https://code.jquery.com/jquery-3.4.1.min.js",
-                    "integrity":"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=",
-                    "crossOrigin":"anonymous"
-                }
+                ];
 
-            ];
+                document.addEventListener('DOMContentLoaded', function(){
+                    initCookies(scripts);   
+                }, false);
 
-            document.addEventListener('DOMContentLoaded', function(){
-                initCookies(scripts);   
-            }, false);
-            
-        </script>
+            </script>
+        </div>
 
     </body>
 </html>
