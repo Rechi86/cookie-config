@@ -1,9 +1,9 @@
 /* 
  * Basic Cookie Setup & Destroy Functionality
  */
-document.addEventListener('DOMContentLoaded', function(){
-    initCookies();   
-}, false);
+//document.addEventListener('DOMContentLoaded', function(){
+//    initCookies();   
+//}, false);
 
 function initCookies(paths) {
     // asign button listeners
