@@ -22,11 +22,11 @@ body {
     transition      : opacity 10s;
     position        : fixed;
     z-index:1000;
-}
-
-#cookie-setup-overlay.show {
-    display  : block;
-    animation: fadeInFromNone 0.5s ease-out forwards;
+    
+    &.show {
+        display  : block;
+        animation: fadeInFromNone 0.5s ease-out forwards;
+    }
 }
 
 #cookie-setup {
@@ -117,14 +117,13 @@ body {
     overflow: auto;
 }
 
-.test-wrapper::before {
-    padding-top:50%;
-    display: block;
-    content: "";
-    position:relative;
-}
-
 .test-wrapper {
+    &:before {
+        padding-top:50%;
+        display: block;
+        content: "";
+        position:relative;
+    }
     border : 1px solid red;
     padding: 1rem;
     width:100%;;
