@@ -19,12 +19,12 @@ function initCookies(paths) {
     }
 
     // only functional cookies -> show blocked iframe info
-    if (cookieState == "functional") {
+    if (cookieState === "functional") {
         wrapAllExternal();
     }
 
     // all cookies allowed -> activate iframes, add additional scripts
-    if (cookieState == "all") {
+    if (cookieState === "all") {
         addScripts(paths);
     }
 }
@@ -52,7 +52,7 @@ function addScripts(scripts) {
             // map all script properies to the newly created element
             for (var prop in scripts[i]) {
                 if (scripts[i].hasOwnProperty(prop)) {
-                    console.log(scripts[i].prop);
+                    console.log(scripts[i][prop]);
                     script[prop] = scripts[i][prop];
                 }
             }
@@ -69,11 +69,20 @@ function wrapAllExternal() {
         wrapBlocked(frames[0]);
         frames[0].remove();
     }
-    
+
     var scripts = document.body.getElementsByTagName('script');
-    while(scripts.length > 0){
-        wrapBlocked(scripts[0]);
-        scripts[0].remove();
+    var extscripts = [];
+    //collect scripts loaded via src attribute
+    for(var i=0; i < scripts.length; i++){
+        //this could check for allowed scripts
+        if(scripts[i].src){
+            extscripts.push(scripts[i]);
+        }
+    }
+    //add wrapper and then delete script element
+    for(var i=0; i < extscripts.length; i++){
+        wrapBlocked(extscripts[i]);
+        extscripts[i].remove();
     }
 }
 
