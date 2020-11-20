@@ -158,7 +158,7 @@ function wrapBlocked(el) {
 
 
         wrapper.innerHTML += "<div class='cookie-setup-blocked-info'>" +
-            "<p>Dieser Inhalt liegt beim Drittanbieter (" +  el.dataset.cookieProvider + ").<br>"+
+            "<p>Dieser Inhalt liegt bei einem Drittanbieter (" +  el.dataset.cookieProvider + ").<br>"+
             " Um den Inhalt abzurufen, musst du den <a href='"+ el.dataset.cookieDataprotection +"' target='_blank'>Datenschutzrichtlinien von "+el.dataset.cookieProvider+"</a>" + " zustimmen.</p>"+
             "<button class='cookie-allow-provider' data-cookie-id='"+ el.dataset.cookieId +"' >Zustimmen und Inhalt anzeigen</button></div>";
 
