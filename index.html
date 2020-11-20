@@ -8,24 +8,10 @@
 
         <script src="./scripts/js.cookie.min.js"></script>
         <script src="./scripts/cookie-setup.js"></script>
-        <script src="./scripts/test/friendlyHelperScript.js"></script>
 
     </head>
     <body>
-        <div id="cookie-setup-overlay">
-            <div id="cookie-setup">
-                <div id="cookie-setup-container">
-                    <h3>Diese Seite verwendet Cookies </h3>
-                    <p>Wir verwenden Cookies, um erweiterte Seitenfunktionen zu ermöglichen und die Zugriffe auf diese Website zu analysieren.<br>
-    Sie können Ihre Einstellungen jederzeit auf der Datenschutz-Seite zurücksetzen. <a href="/datenschutz">Weitere Infos</a>
-                    </p>
-                
-                <button id="cookie-setup-allow-functional" class="btn">Funktionscookies erlauben</button>
-                <button id="cookie-setup-allow-all" class="btn">Alle Cookies erlauben</button>
-                
-                </div>
-            </div>
-        </div>
+
         
         <div id="content">
             <h1>Testinhalt</h1>
@@ -41,37 +27,31 @@
                 semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
             </p>
         </div>
+
+        <a href="" onclick="resetCookies()">Cookie Einstellungen zurücksetzen</a>
         
 
         
         <div class="test-wrapper">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/k8v_l5iGJZM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="youtube-with-data" width="560" height="315" data-cookie-id="youtube" data-cookie-provider="Youtube" data-cookie-dataprotection="http://www.pundr.at" data-src="https://www.youtube.com/embed/k8v_l5iGJZM" src="about:blank" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         
         <div class="test-wrapper">
-            <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>    
+            <iframe id="soundcloud-with-data" width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" data-cookie-id="soundcloud" data-cookie-provider="Soundcloud" data-src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/907803715&color=%23040404&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>    
+        </div>
+
+        <div class="test-wrapper">
+            <iframe id="youtube-with-data-2" width="560" height="315" data-cookie-id="youtube" data-cookie-provider="Youtube" data-cookie-dataprotection="http://www.pundr.at" data-src="https://www.youtube.com/embed/k8v_l5iGJZM" src="about:blank" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="test-wrapper">
+            <iframe id="pundr-no-data" width="560" height="315" data-cookie-id="pundr" data-cookie-provider="P&R" data-cookie-dataprotection="http://www.pundr.at" src="https://www.pundr.at" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
             
 
         <script>
 
-//             set additional paths array of objects with needed properties
-//             Info:  Some html-properties need camelcase js-Properties, e.g. crossorign -> crossOrigin
-            let scripts = [
-                {
-                    "src":"./scripts/test/evilTrackingScript.js"
-                },
-                {
-                    "src":"https://code.jquery.com/jquery-3.4.1.min.js",
-                    "integrity":"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=",
-                    "crossOrigin":"anonymous"
-                }
 
-            ];
-
-            document.addEventListener('DOMContentLoaded', function(){
-                initCookies(scripts);   
-            }, false);
 
         </script>
 
